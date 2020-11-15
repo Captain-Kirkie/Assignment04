@@ -11,8 +11,6 @@ public class practice2 {
         for(int element : originalArray){
             System.out.println("value " + element);
         }
-
-
     }
 
     static void mergeSort(int[] array, int lowIndex, int highIndex){

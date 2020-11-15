@@ -43,7 +43,7 @@ public class sortUtil<T extends Comparable<? super T>> {
         System.out.println("Sorted Reverse order ");
         System.out.println(integerArrayList);
 
-        //Sorint strings
+        //Sorting strings
         ArrayList<String> stringArrayList = new ArrayList<String>();
         stringArrayList.add("David");
         stringArrayList.add("Luke");
@@ -73,7 +73,6 @@ public class sortUtil<T extends Comparable<? super T>> {
 
 
     }
-
 
     public static <T> void mergesortDriver(ArrayList<T> arrayList, Comparator<? super T> comparator) {
         //copy the array list over to the array

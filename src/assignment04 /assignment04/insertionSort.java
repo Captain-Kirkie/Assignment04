@@ -6,51 +6,48 @@ import java.util.Comparator;
 public class insertionSort<T extends Comparable<? super T>> {
 
 
+    public static void main(String[] args) {
+        String[] stringArray = {"David", "Clark", "Luke", "Kirk", "Bennit", "Mario", "Nick", "Peter", "Kristin",
+                "Tori", "Rachel", "Maggie", "Anna", "Madi", "Mark"};
 
-   public static void main(String[] args){
-       String[] stringArray = {"David", "Clark" , "Luke", "Kirk", "Bennit", "Mario", "Nick", "Peter", "Kristin",
-               "Tori", "Rachel", "Maggie", "Anna", "Madi", "Mark"};
+        //unsorted
+        System.out.println("Unsorted string array ");
+        System.out.println();
+        for (String s : stringArray) {
+            System.out.println(s);
+        }
 
-       //unsorted
-       System.out.println("Unsorted string array ");
-       System.out.println();
-       for(int i = 0; i < stringArray.length; i++){
-           System.out.println(stringArray[i]);
-       }
+        System.out.println();
 
-       System.out.println();
+        System.out.println("Sorted String array");
+        System.out.println();
+        insertionSort<String> stringInsertionSort = new insertionSort<>();
+        stringInsertionSort.insertionSort(stringArray, Comparator.naturalOrder());
 
-       System.out.println("Sorted String array");
-       System.out.println();
-       insertionSort<String> stringInsertionSort = new insertionSort<>();
-       stringInsertionSort.insertionSort(stringArray, Comparator.naturalOrder());
-
-       for(int i = 0; i < stringArray.length; i++){
-           System.out.println(stringArray[i]);
-       }
-
-
-       Integer[] intArray = {69,420,666,720,360,540,180,900};
-       System.out.println("Unsorted array ");
-       System.out.println();
-       for(int i = 0; i < intArray.length; i++){
-           System.out.println(intArray[i]);
-       }
+        for (String s : stringArray) {
+            System.out.println(s);
+        }
 
 
-       insertionSort<Integer> intSorter = new insertionSort<>();
-       intSorter.insertionSort(intArray, Comparator.naturalOrder());
-       System.out.println("Sorted array ");
-       System.out.println();
-       for(int i = 0; i < intArray.length; i++){
-           System.out.println(intArray[i]);
-       }
-
-   }
+        Integer[] intArray = {69, 420, 666, 720, 360, 540, 180, 900};
+        System.out.println("Unsorted array ");
+        System.out.println();
+        for (Integer integer : intArray) {
+            System.out.println(integer);
+        }
 
 
+        insertionSort<Integer> intSorter = new insertionSort<>();
+        intSorter.insertionSort(intArray, Comparator.naturalOrder());
+        System.out.println("Sorted array ");
+        System.out.println();
+        for (Integer integer : intArray) {
+            System.out.println(integer);
+        }
+    }
 
-    void insertionSort(T[] arr, Comparator comparator){ //TODO: pass a comparator
+
+    static <T> void insertionSort(T[] arr, Comparator comparator) {
         //start at first index and itterate through the end
         for (int i = 1; i < arr.length; i++) {
             int currentIndex = i;
