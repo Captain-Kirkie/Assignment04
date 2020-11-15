@@ -1,7 +1,7 @@
 package assignment04;
 //TODO: there is an issue with this
 //https://examples.javacodegeeks.com/merge-sort-java-algorithm-code-example/
-public class practice2 {
+public class PracticeMerge2 {
 //if odd num of elements, > elements on left, and < on right
     static int[] originalArray = {3,5,10,45,34,77};
 

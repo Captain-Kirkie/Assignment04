@@ -7,6 +7,7 @@ import java.util.Comparator;
 
 //used as reference http://www.java2s.com/Tutorial/Java/0140__Collections/GenericMergeSorterwithgenericComparator.htm
 public class sortUtil<T extends Comparable<? super T>> {
+    final static int THRESHOLD = 10;
     public static void main(String args[]) {
 
         //Make a reverse order comparator for integers
@@ -70,8 +71,6 @@ public class sortUtil<T extends Comparable<? super T>> {
         sortUtil.mergesortDriver(stringArrayList, reverseOrderStringComparator);
         System.out.println("Sorted Strings Reverse Order");
         System.out.println(stringArrayList);
-
-
     }
 
     public static <T> void mergesortDriver(ArrayList<T> arrayList, Comparator<? super T> comparator) {
@@ -80,21 +79,22 @@ public class sortUtil<T extends Comparable<? super T>> {
         for (int i = 0; i < arrayList.size(); i++) {
             array[i] = arrayList.get(i);
         }
+
         mergeSort(array, 0, array.length - 1, comparator);
 
         //copy back to arrayList
         for(int i = 0; i < arrayList.size(); i++){
             arrayList.set(i, array[i]);
         }
-
     }
 
     private static <T> void mergeSort(T[] array, int start, int end, Comparator<T> comparator) {
         if (start == end) { //if there is only one item in the array
             return;
         }
-        int mid = (start + end) / 2;
+        
 
+        int mid = (start + end) / 2;
         //sort both halves
         mergeSort(array, start, mid, comparator); //sort left half of array
         mergeSort(array, mid + 1, end, comparator); //sort the right
@@ -140,7 +140,6 @@ public class sortUtil<T extends Comparable<? super T>> {
             array[start + indexCurrent] = (T) values[indexCurrent];
         }
     }
-
 
 
 }

@@ -3,7 +3,7 @@ package assignment04;
 import java.util.Comparator;
 
 // https://big-o.io/examples/insertion-sort/java-generic/
-public class insertionSort<T extends Comparable<? super T>> {
+public class InsertionSort<T extends Comparable<? super T>> {
 
 
     public static void main(String[] args) {
@@ -17,18 +17,18 @@ public class insertionSort<T extends Comparable<? super T>> {
             System.out.println(s);
         }
 
+        //testing on a string array
         System.out.println();
-
         System.out.println("Sorted String array");
         System.out.println();
-        insertionSort<String> stringInsertionSort = new insertionSort<>();
+        InsertionSort<String> stringInsertionSort = new InsertionSort<>();
         stringInsertionSort.insertionSort(stringArray, Comparator.naturalOrder());
 
         for (String s : stringArray) {
             System.out.println(s);
         }
 
-
+        //testing on int array
         Integer[] intArray = {69, 420, 666, 720, 360, 540, 180, 900};
         System.out.println("Unsorted array ");
         System.out.println();
@@ -37,7 +37,7 @@ public class insertionSort<T extends Comparable<? super T>> {
         }
 
 
-        insertionSort<Integer> intSorter = new insertionSort<>();
+        InsertionSort<Integer> intSorter = new InsertionSort<>();
         intSorter.insertionSort(intArray, Comparator.naturalOrder());
         System.out.println("Sorted array ");
         System.out.println();
@@ -47,8 +47,8 @@ public class insertionSort<T extends Comparable<? super T>> {
     }
 
 
-    static <T> void insertionSort(T[] arr, Comparator comparator) {
-        //start at first index and itterate through the end
+    public static <T> void insertionSort(T[] arr, Comparator comparator) {
+        //start at first index and iterate through the end
         for (int i = 1; i < arr.length; i++) {
             int currentIndex = i;
             //Check if current index is at least one
