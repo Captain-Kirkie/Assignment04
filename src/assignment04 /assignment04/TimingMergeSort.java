@@ -27,26 +27,24 @@ public class TimingMergeSort {
 
 
             System.out.println("Size of N: " + N);
-            double timesToLoop = 500;
+            double timesToLoop = 1000;
             startTime = System.nanoTime(); //time it
             double totalTimeToPopArray = 0;
+            ArrayList<Integer> testArray1 = TimingMergeSort.shuffleListNonRandom(N); //create random array of size N
+            //System.out.println("this is orginial " + testArray1);
             for (int k = 0; k < timesToLoop; k++){
-                popArrayStartTime = System.nanoTime();
-                ArrayList<Integer> testArray = TimingMergeSort.shuffleListNonRandom(N); //create random array of size N
-                popArrayStopTime = System.nanoTime();
-                totalTimeToPopArray = popArrayStopTime - popArrayStartTime;
-
-                startTime = System.nanoTime();
-                sortUtil.quickSortDriver(testArray, Comparator.naturalOrder());
+                ArrayList<Integer> testArray2 = new ArrayList<>(testArray1);
+                sortUtil.quickSortDriver(testArray2, Comparator.naturalOrder());
             }
 
             double midPoint = System.nanoTime();
 
             for (int empty = 0; empty < timesToLoop; empty++) {
-                //runs and does nothing
+               
             }
+
             stopTime = System.nanoTime();
-            double newAvg = (((midPoint - startTime) - totalTimeToPopArray) - (stopTime - midPoint)) / timesToLoop;
+            double newAvg = (((midPoint - startTime)) - (stopTime - midPoint)) / timesToLoop;
             //System.out.println(newAvg);
             avgList.add(newAvg);
         }

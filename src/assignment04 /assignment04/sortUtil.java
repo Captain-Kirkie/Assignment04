@@ -7,7 +7,7 @@ import java.util.Comparator;
 
 //used as reference http://www.java2s.com/Tutorial/Java/0140__Collections/GenericMergeSorterwithgenericComparator.htm
 public class sortUtil<T extends Comparable<? super T>> {
-    final static int THRESHOLD = 10;
+    final static int THRESHOLD = 40;
 
     public static void main(String args[]) {
 
