@@ -2,6 +2,7 @@ package assignment04;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Random;
 
 public class TimingMergeSort {
@@ -9,19 +10,53 @@ public class TimingMergeSort {
 
     public static void main(String[] args) {
 
-        double pow = 11;
-        int N = (int) Math.pow(2, pow); //this will be the size of the list every time
+        ArrayList<Double> avgList = new ArrayList<>();
+
+        long startTime, stopTime, popArrayStartTime, popArrayStopTime;
+;
+        for (int r = 11; r < 20; r++) { //how many averages to calculate
+
+            ArrayList<Double> timeList = new ArrayList<Double>(); //reset the list
+
+            startTime = System.nanoTime();
+            while (System.nanoTime() - startTime < 1000000000) {
+                //empty block
+                //Wait for thread to stabalize
+            }
+            int N = (int) Math.pow(2, r); //this will be the size of the collection
 
 
-        ArrayList<Integer> randList1 = TimingMergeSort.shuffleListNonRandom(20);
-        ArrayList<Integer> randList2 = TimingMergeSort.shuffleListNonRandom(20);
-        ArrayList<Integer> randList3 = TimingMergeSort.shuffleListNonRandom(20);
-        ArrayList<Integer> randList4 = TimingMergeSort.shuffleListNonRandom(20);
+            System.out.println("Size of N: " + N);
+            double timesToLoop = 500;
+            startTime = System.nanoTime(); //time it
+            double totalTimeToPopArray = 0;
+            for (int k = 0; k < timesToLoop; k++){
+                popArrayStartTime = System.nanoTime();
+                ArrayList<Integer> testArray = TimingMergeSort.shuffleListNonRandom(N); //create random array of size N
+                popArrayStopTime = System.nanoTime();
+                totalTimeToPopArray = popArrayStopTime - popArrayStartTime;
 
-        System.out.println(randList1);
-        System.out.println(randList2);
-        System.out.println(randList3);
-        System.out.println(randList4);
+                startTime = System.nanoTime();
+                sortUtil.quickSortDriver(testArray, Comparator.naturalOrder());
+            }
+
+            double midPoint = System.nanoTime();
+
+            for (int empty = 0; empty < timesToLoop; empty++) {
+                //runs and does nothing
+            }
+            stopTime = System.nanoTime();
+            double newAvg = (((midPoint - startTime) - totalTimeToPopArray) - (stopTime - midPoint)) / timesToLoop;
+            //System.out.println(newAvg);
+            avgList.add(newAvg);
+        }
+
+        for (Double d : avgList) {
+            System.out.println(d);
+        }
+
+
+
 
     }
 
@@ -47,7 +82,7 @@ public class TimingMergeSort {
      * @return
      */
     //average case
-    public static ArrayList<Integer> generateAverageCase(int size) {
+    public static ArrayList<Integer> genrateRandomArray(int size) {
         ArrayList<Integer> randomList = new ArrayList<>();
         for (int i = 0; i < size; i++) {
             int rand = (int) (Math.random() * size);
