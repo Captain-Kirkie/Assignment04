@@ -38,7 +38,7 @@ public class sortUtil<T extends Comparable<? super T>> {
         System.out.println(integerArrayList);
 
 
-        //sort based of natural order
+      //  sort based of natural order
         System.out.println(integerArrayList);
         sortUtil.mergesortDriver(integerArrayList, reverseOrderIntegerComparator);
         System.out.println("Sorted Reverse order ");
@@ -92,15 +92,19 @@ public class sortUtil<T extends Comparable<? super T>> {
         if (start == end) { //if there is only one item in the array
             return;
         }
-        
+        if(end - start <= THRESHOLD){
+            InsertionSort.insertionSort(array, comparator);
+        }else{ //do merge sort
+            int mid = (start + end) / 2;
+            //sort both halves
+            mergeSort(array, start, mid, comparator); //sort left half of array
+            mergeSort(array, mid + 1, end, comparator); //sort the right
 
-        int mid = (start + end) / 2;
-        //sort both halves
-        mergeSort(array, start, mid, comparator); //sort left half of array
-        mergeSort(array, mid + 1, end, comparator); //sort the right
+            //merge them
+            merge(array, start, mid, end, comparator);
+        }
 
-        //merge them
-        merge(array, start, mid, end, comparator);
+
     }
 
     private static <T> void merge(T[] array, int start, int mid, int end, Comparator<T> comparator) {
