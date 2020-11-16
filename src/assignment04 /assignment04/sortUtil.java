@@ -8,6 +8,7 @@ import java.util.Comparator;
 //used as reference http://www.java2s.com/Tutorial/Java/0140__Collections/GenericMergeSorterwithgenericComparator.htm
 public class sortUtil<T extends Comparable<? super T>> {
     final static int THRESHOLD = 10;
+
     public static void main(String args[]) {
 
         //Make a reverse order comparator for integers
@@ -27,22 +28,22 @@ public class sortUtil<T extends Comparable<? super T>> {
 
         //populate with random numbers
         ArrayList<Integer> integerArrayList = new ArrayList<>();
-        for(int i = 0; i < 10; i++){
+        for (int i = 0; i < 10; i++) {
             int rand = (int) (Math.random() * 100);
             integerArrayList.add(rand);
         }
-        //sort based of natural order
-        System.out.println(integerArrayList);
-        sortUtil.mergesortDriver(integerArrayList, Comparator.naturalOrder());
-        System.out.println("Sorted ");
-        System.out.println(integerArrayList);
-
-
-      //  sort based of natural order
-        System.out.println(integerArrayList);
-        sortUtil.mergesortDriver(integerArrayList, reverseOrderIntegerComparator);
-        System.out.println("Sorted Reverse order ");
-        System.out.println(integerArrayList);
+//        //sort based of natural order
+//        System.out.println(integerArrayList);
+//        sortUtil.mergeSort(integerArrayList, Comparator.naturalOrder());
+//        System.out.println("Sorted ");
+//        System.out.println(integerArrayList);
+//
+//
+//      //  sort based of natural order
+//        System.out.println(integerArrayList);
+//        sortUtil.mergeSort(integerArrayList, reverseOrderIntegerComparator);
+//        System.out.println("Sorted Reverse order ");
+//        System.out.println(integerArrayList);
 
         //Sorting strings
         ArrayList<String> stringArrayList = new ArrayList<String>();
@@ -63,17 +64,39 @@ public class sortUtil<T extends Comparable<? super T>> {
         stringArrayList.add("Mario");
         stringArrayList.add("Nick");
 
-        System.out.println();
-        sortUtil.mergesortDriver(stringArrayList, Comparator.naturalOrder());
-        System.out.println("Sorted Strings ");
+//        System.out.println();
+//        sortUtil.mergeSort(stringArrayList, Comparator.naturalOrder());
+//        System.out.println("Sorted Strings ");
+//        System.out.println(stringArrayList);
+//
+//        sortUtil.mergeSort(stringArrayList, reverseOrderStringComparator);
+//        System.out.println("Sorted Strings Reverse Order");
+//        System.out.println(stringArrayList);
+
+
+        System.out.println("QuickSort stuff");
+        System.out.println(stringArrayList);
+        quickSortDriver(stringArrayList, Comparator.naturalOrder());
         System.out.println(stringArrayList);
 
-        sortUtil.mergesortDriver(stringArrayList, reverseOrderStringComparator);
-        System.out.println("Sorted Strings Reverse Order");
-        System.out.println(stringArrayList);
+        System.out.println();
+        System.out.println("Integer Sorting");
+        System.out.println(integerArrayList);
+        quickSortDriver(integerArrayList, Comparator.naturalOrder());
+        System.out.println(integerArrayList);
+
+        ArrayList<Integer> sample = new ArrayList<>();
+        sample.add(666);
+        sample.add(69);
+        sample.add(420);
+
+        quickSortDriver(sample, Comparator.naturalOrder());
+
+
+
     }
 
-    public static <T> void mergesortDriver(ArrayList<T> arrayList, Comparator<? super T> comparator) {
+    public static <T> void mergeSort(ArrayList<T> arrayList, Comparator<? super T> comparator) {
         //copy the array list over to the array
         T[] array = (T[]) new Object[arrayList.size()];
         for (int i = 0; i < arrayList.size(); i++) {
@@ -83,7 +106,7 @@ public class sortUtil<T extends Comparable<? super T>> {
         mergeSort(array, 0, array.length - 1, comparator);
 
         //copy back to arrayList
-        for(int i = 0; i < arrayList.size(); i++){
+        for (int i = 0; i < arrayList.size(); i++) {
             arrayList.set(i, array[i]);
         }
     }
@@ -92,9 +115,9 @@ public class sortUtil<T extends Comparable<? super T>> {
         if (start == end) { //if there is only one item in the array
             return;
         }
-        if(end - start <= THRESHOLD){
+        if (end - start <= THRESHOLD) {
             InsertionSort.insertionSort(array, comparator);
-        }else{ //do merge sort
+        } else { //do merge sort
             int mid = (start + end) / 2;
             //sort both halves
             mergeSort(array, start, mid, comparator); //sort left half of array
@@ -103,20 +126,18 @@ public class sortUtil<T extends Comparable<? super T>> {
             //merge them
             merge(array, start, mid, end, comparator);
         }
-
-
     }
 
     private static <T> void merge(T[] array, int start, int mid, int end, Comparator<T> comparator) {
         int size = end - start + 1;
-        Object[] values = new Object[size];
+        Object[] values = new Object[size]; //this will be sorted array
 
         int leftPointer = start;
         int rightPointer = mid + 1;
 
-        int indexCurrent = 0;
+        int indexCurrent = 0; //index in value
 
-        while (leftPointer <= mid && rightPointer <= end) {
+        while (leftPointer <= mid && rightPointer <= end) { //do this while either pointer is less than array size
             if (comparator.compare(array[leftPointer], array[rightPointer]) <= 0) {
                 values[indexCurrent] = array[leftPointer];
                 leftPointer++;
@@ -143,6 +164,74 @@ public class sortUtil<T extends Comparable<? super T>> {
         for (indexCurrent = 0; indexCurrent < size; indexCurrent++) {
             array[start + indexCurrent] = (T) values[indexCurrent];
         }
+    }
+
+
+    public static <E> void quickSortDriver(ArrayList<E> arrayList, Comparator comparator) {
+        E[] arr = (E[]) new Object[arrayList.size()];
+        for (int i = 0; i < arrayList.size(); i++) {
+            arr[i] = arrayList.get(i);
+        }
+        quicksort(arr, 0, arr.length - 1, comparator);
+
+        for (int i = 0; i < arrayList.size(); i++) {
+            arrayList.set(i, arr[i]);
+        }
+
+    }
+
+    private static <E> void quicksort(E[] arr, int start, int end, Comparator comparator) {
+        if (arr.length <= THRESHOLD) {
+            InsertionSort.insertionSort(arr, comparator);
+        } else {
+            // base case
+            if (start >= end) {
+                return;
+            }
+
+            int pivot_index = partition(arr, start, end, comparator);
+            quicksort(arr, start, pivot_index - 1, comparator);
+            quicksort(arr, pivot_index + 1, end, comparator);
+        }
+
+    }
+
+    private static <T> int partition(T[] arr, int start, int end, Comparator comparator) {
+        // initialize start and end of array, and pivot
+        int pivot_index = end, L = start, R = end - 1;
+        while (L <= R) {
+            if (comparator.compare(arr[L], arr[pivot_index]) <= 0) { //if left array is less than pivot index arr[L] <= arr[pivot_index]
+                L++;
+                continue;
+            }
+            if (comparator.compare(arr[R], arr[pivot_index]) >= 0) { //if right is less than pivot indes arr[R] >= arr[pivot_index]
+                R--;
+                continue;
+            }
+            swap(arr, L, R);
+            L++;
+            R--;
+        }
+        // After both partitions are sorted relative to the pivot, put pivot in-between the partitions
+        // by swapping its value with the last value of arr[L]
+        swap(arr, L, pivot_index);
+        // This is a critical step. Without it quicksort doesn't work. You have to update pivot_index
+        // after you swap the values. This caused a bug in my code for a while.
+        pivot_index = L;
+        return pivot_index;
+    }
+
+    public static <T> void swap(T[] arr, int l, int r) {
+        T temp = arr[l];
+        arr[l] = arr[r];
+        arr[r] = temp;
+    }
+
+    public static void printArray(int[] arr) {
+        for (int number : arr) {
+            System.out.print(number + ", ");
+        }
+        System.out.println();
     }
 
 

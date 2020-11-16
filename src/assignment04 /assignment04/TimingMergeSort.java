@@ -23,7 +23,6 @@ public class TimingMergeSort {
         System.out.println(randList3);
         System.out.println(randList4);
 
-
     }
 
     /**
@@ -103,8 +102,6 @@ public class TimingMergeSort {
             int nxt = ran.nextInt(arrayList.size());
             Collections.swap(arrayList, i, nxt);
         }
-
-
     }
 
 }
