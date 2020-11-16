@@ -11,33 +11,19 @@ public class TimingMergeSort {
     public static void main(String[] args) {
 
         double pow = 11;
-        int N = (int) Math.pow(2, pow);
+        int N = (int) Math.pow(2, pow); //this will be the size of the list every time
 
-        ArrayList<Integer> sortedArrayList = new ArrayList<>();
-        for (int i = 0; i < 30; i++) {
-            sortedArrayList.add(i);
-        }
 
-        System.out.println("Sorted list");
-        System.out.println(sortedArrayList);
 
-        //shuffle
-        TimingMergeSort.shuffleList(sortedArrayList);
-
-        System.out.println("Shuffled List");
-        System.out.println(sortedArrayList);
-
-        System.out.println("Resort list");
-        sortUtil.mergesortDriver(sortedArrayList, Comparator.naturalOrder());
-        System.out.println(sortedArrayList);
-
-        System.out.println("Reshuffle list");
-        TimingMergeSort.shuffleList(sortedArrayList);
-        System.out.println(sortedArrayList);
 
 
     }
 
+    /**
+     * generates an array list of specified size in sorted order
+     * @param Size
+     * @return
+     */
     //generate best case
     public static ArrayList<Integer> generateBestCase(int Size) {
         ArrayList<Integer> bestCaseDoubleArray = new ArrayList<>(); //will already be in sorted order
@@ -47,6 +33,11 @@ public class TimingMergeSort {
         return bestCaseDoubleArray;
     }
 
+    /**
+     * Genearates an randomly Orders list of specified size
+     * @param size
+     * @return
+     */
     //average case
     public static ArrayList<Integer> generateAverageCase(int size) {
         ArrayList<Integer> randomList = new ArrayList<>();
@@ -57,6 +48,11 @@ public class TimingMergeSort {
         return randomList;
     }
 
+    /**
+     * generates a list that is sorted in reverse order
+     * @param size
+     * @return
+     */
     //worst case
     public static ArrayList<Integer> generateWorstCase(int size) {
         ArrayList<Integer> worstCaseArrayList = new ArrayList<>();
@@ -74,6 +70,4 @@ public class TimingMergeSort {
         }
     }
 
-
-    //TODO: implement timing
 }
