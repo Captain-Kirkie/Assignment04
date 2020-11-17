@@ -48,22 +48,22 @@ public class sortUtil<T extends Comparable<? super T>> {
 
         //Sorting strings
         ArrayList<String> stringArrayList = new ArrayList<String>();
-        stringArrayList.add("David");
-        stringArrayList.add("Luke");
-        stringArrayList.add("Clark");
-        stringArrayList.add("Kirk");
-        stringArrayList.add("Evie");
-        stringArrayList.add("Rachel");
-        stringArrayList.add("Anna");
-        stringArrayList.add("Maggie");
-        stringArrayList.add("Mark");
-        stringArrayList.add("Madeline");
-        stringArrayList.add("Kristin");
-        stringArrayList.add("Victoria");
-        stringArrayList.add("Peter");
-        stringArrayList.add("Bennit");
-        stringArrayList.add("Mario");
-        stringArrayList.add("Nick");
+//        stringArrayList.add("David");
+//        stringArrayList.add("Luke");
+//        stringArrayList.add("Clark");
+//        stringArrayList.add("Kirk");
+//        stringArrayList.add("Evie");
+//        stringArrayList.add("Rachel");
+//        stringArrayList.add("Anna");
+//        stringArrayList.add("Maggie");
+//        stringArrayList.add("Mark");
+//        stringArrayList.add("Madeline");
+//        stringArrayList.add("Kristin");
+//        stringArrayList.add("Victoria");
+//        stringArrayList.add("Peter");
+//        stringArrayList.add("Bennit");
+//        stringArrayList.add("Mario");
+//        stringArrayList.add("Nick");
 
 //        System.out.println();
 //        sortUtil.mergeSort(stringArrayList, Comparator.naturalOrder());
@@ -74,26 +74,34 @@ public class sortUtil<T extends Comparable<? super T>> {
 //        System.out.println("Sorted Strings Reverse Order");
 //        System.out.println(stringArrayList);
 //
-
-        System.out.println("QuickSort stuff");
-        System.out.println(stringArrayList);
+//
+//        System.out.println("QuickSort stuff");
+//        System.out.println(stringArrayList);
         //quickSortDriver(stringArrayList, Comparator.naturalOrder());
-        kirkQuickSort.quickSortDriverKirk(stringArrayList, Comparator.naturalOrder());
-        System.out.println(stringArrayList);
+//        kirkQuickSort.quickSortDriverKirk(stringArrayList, Comparator.naturalOrder());
+//        System.out.println(stringArrayList);
+//
+//        System.out.println();
+//        System.out.println("Integer Sorting");
+//        System.out.println(integerArrayList);
+//        //quickSortDriver(integerArrayList, Comparator.naturalOrder());
+//        kirkQuickSort.quickSortDriverKirk(integerArrayList, Comparator.naturalOrder());
+//        System.out.println("Sorted list" + integerArrayList);
 
-        System.out.println();
-        System.out.println("Integer Sorting");
-        System.out.println(integerArrayList);
-        //quickSortDriver(integerArrayList, Comparator.naturalOrder());
-        kirkQuickSort.quickSortDriverKirk(integerArrayList, Comparator.naturalOrder());
-        System.out.println("Sorted list" + integerArrayList);
 
-        ArrayList<Integer> sample = new ArrayList<>();
-        sample.add(666);
-        sample.add(69);
-        sample.add(420);
+        ArrayList<Integer> integerArrayList1 = new ArrayList<>();
 
-       // quickSortDriver(sample, Comparator.naturalOrder());
+        for(int i = 0; i < 1000; i++){
+            int rand = (int) (Math.random() * 10000);
+            integerArrayList1.add(rand);
+        }
+
+        sortUtil.quickSort(integerArrayList1, Comparator.naturalOrder());
+
+        System.out.println(integerArrayList1);
+
+
+
 
 
     }
@@ -178,19 +186,19 @@ public class sortUtil<T extends Comparable<? super T>> {
      * * because it is always random and easy to implement.
      */
 
-    public static <E> void quickSortDriver(ArrayList<E> arrayList, Comparator comparator) {
+    public static <E> void quickSort(ArrayList<E> arrayList, Comparator comparator) {
         E[] arr = (E[]) new Object[arrayList.size()];
         for (int i = 0; i < arrayList.size(); i++) {
             arr[i] = arrayList.get(i);
         }
-        quicksort(arr, 0, arr.length - 1, comparator);
+        Quicksort(arr, 0, arr.length - 1, comparator);
 
         for (int i = 0; i < arrayList.size(); i++) {
             arrayList.set(i, arr[i]);
         }
     }
 
-    private static <E> void quicksort(E[] arr, int start, int end, Comparator comparator) {
+    private static <E> void Quicksort(E[] arr, int start, int end, Comparator comparator) {
         if (arr.length <= TimingMergeSortThreshHold.THRESHOLD) {
             InsertionSort.insertionSort(arr, comparator);
         } else {
@@ -200,42 +208,19 @@ public class sortUtil<T extends Comparable<? super T>> {
             }
 
             int pivot_index = partition(arr, start, end, comparator);
-            quicksort(arr, start, pivot_index - 1, comparator);
-            quicksort(arr, pivot_index + 1, end, comparator);
+            Quicksort(arr, start, pivot_index - 1, comparator);
+            Quicksort(arr, pivot_index + 1, end, comparator);
         }
 
     }
 
     //choosing pivot based on median
     private static <T> int partition(T[] arr, int start, int end, Comparator comparator) {
-
-        int pivot_index = end;
-        //int pivot_index = start;
+       // kirkQuickSort.random(arr, start, end);
+        int pivot_index = median(arr, start, end, comparator);
+//        int pivot_index = end;
 
         int L = start, R = end - 1;
-       //sorts using index at end and start but not in middle
-        //Test Pivot Using Median
-        // Pivot using median of three  random values
-//        int rand1 = (int) (Math.random() * (end - start - 1));
-//        int rand2 = (int) (Math.random() * (end - start - 1));
-//        int rand3 = (int) (Math.random() * (end - start - 1));
-//        Integer[] threeRandomValues = new Integer[3];
-//
-//        threeRandomValues[0] = rand1;
-//        threeRandomValues[1] = rand2;
-//        threeRandomValues[2] = rand3;
-//
-//        InsertionSort.insertionSort(threeRandomValues, Comparator.naturalOrder());
-//
-//        pivot_index = threeRandomValues[1];
-
-
-//        int test = (int) (Math.random() * (end - start - 1));
-//        System.out.println("Test " + test);
-//        pivot_index = test;
-        // median
-
-        //InsertionSort.insertionSort(threeRandomValues, Comparator.naturalOrder());
 
         while (L <= R) {
             if (comparator.compare(arr[L], arr[pivot_index]) <= 0) { //if left array is less than pivot index arr[L] <= arr[pivot_index]
@@ -281,5 +266,32 @@ public class sortUtil<T extends Comparable<? super T>> {
         System.out.println();
     }
 
+
+
+    //find median
+    public static <T> int median(T[] arr, int low, int high, Comparator comparator) {
+        int center = (low + high) / 2; //find the center
+
+        if (comparator.compare(low, center) > 0) { //if low greater than center, swap
+            swapT(arr, low, center);
+        }
+        if (comparator.compare(low, high) > 0) { //if low is greater than high swap
+            swapT(arr, low, high);
+        }
+
+        if (comparator.compare(center, high) > 0) { // if center is greater than high, swap
+            swapT(arr, center, high);
+        }
+
+        swapT(arr, center, high); //swap the center and the high
+        return high; //return high
+
+
+    }
+    public static <T> void swapT(T[] arr, int low, int high) {
+        T temp1 = arr[high];
+        arr[high] = arr[low];
+        arr[low] = temp1;
+    }
 
 }

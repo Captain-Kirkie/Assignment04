@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 public class bestAvgWorstExp {
-
+   // https://examples.javacodegeeks.com/quicksort-java-algorithm-code-example/
     public static void main(String[] args) {
 
         ArrayList<Double> avgList = new ArrayList<>();
@@ -28,11 +28,11 @@ public class bestAvgWorstExp {
             double timesToLoop = 1000;
             startTime = System.nanoTime(); //time it
 
-            ArrayList<Integer> testArray1 = TimingMergeSortThreshHold.shuffleListNonRandom(N); //create random array of size N
+            ArrayList<Integer> testArray1 = TimingMergeSortThreshHold.generateBestCase(N); //create random array of size N
 
             for (int k = 0; k < timesToLoop; k++) {
                 ArrayList<Integer> testArray2 = new ArrayList<>(testArray1);
-                kirkQuickSort.quickSortDriverKirk(testArray2,Comparator.naturalOrder());
+                sortUtil.mergeSort(testArray2, Comparator.naturalOrder());
             }
 
             double midPoint = System.nanoTime();
