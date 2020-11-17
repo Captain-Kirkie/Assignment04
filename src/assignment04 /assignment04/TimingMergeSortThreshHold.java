@@ -5,8 +5,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Random;
 
-public class TimingMergeSort {
-    static int THRESHOLD = 50;
+public class TimingMergeSortThreshHold {
+    static int THRESHOLD = 0;
 
     public static void main(String[] args) {
 
@@ -17,7 +17,7 @@ public class TimingMergeSort {
 ;
 //        for (int r = 11; r < 20; r++) { //how many averages to calculate
 
-        for(int i = 0; i <= 50; i ++){
+        for(int i = 0; i <= 100; i ++){
 
             startTime = System.nanoTime();
             while (System.nanoTime() - startTime < 1000000000) {
@@ -31,7 +31,7 @@ public class TimingMergeSort {
             double timesToLoop = 1000;
             startTime = System.nanoTime(); //time it
             double totalTimeToPopArray = 0;
-            ArrayList<Integer> testArray1 = TimingMergeSort.genrateRandomArray(N); //create random array of size N
+            ArrayList<Integer> testArray1 = TimingMergeSortThreshHold.genrateRandomArray(N); //create random array of size N
             //System.out.println("this is orginial " + testArray1);
             for (int k = 0; k < timesToLoop; k++){
                 ArrayList<Integer> testArray2 = new ArrayList<>(testArray1);
@@ -41,7 +41,7 @@ public class TimingMergeSort {
             double midPoint = System.nanoTime();
 
             for (int empty = 0; empty < timesToLoop; empty++) {
-
+                ArrayList<Integer> testArray2 = new ArrayList<>(testArray1);
             }
 
             stopTime = System.nanoTime();

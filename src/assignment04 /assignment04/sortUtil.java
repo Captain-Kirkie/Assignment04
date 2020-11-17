@@ -115,7 +115,7 @@ public class sortUtil<T extends Comparable<? super T>> {
         if (start == end) { //if there is only one item in the array
             return;
         }
-        if (end - start <= TimingMergeSort.THRESHOLD) {
+        if (end - start <= TimingMergeSortThreshHold.THRESHOLD) {
             InsertionSort.insertionSort(array, comparator);
         } else { //do merge sort
             int mid = (start + end) / 2;
@@ -189,7 +189,7 @@ public class sortUtil<T extends Comparable<? super T>> {
     }
 
     private static <E> void quicksort(E[] arr, int start, int end, Comparator comparator) {
-        if (arr.length <= TimingMergeSort.THRESHOLD) {
+        if (arr.length <= TimingMergeSortThreshHold.THRESHOLD) {
             InsertionSort.insertionSort(arr, comparator);
         } else {
             // base case
