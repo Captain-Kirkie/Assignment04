@@ -3,7 +3,7 @@ package assignment04;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-public class bestAvgWorstExp {
+public class pivotExperiment {
 
     public static void main(String[] args) {
 
@@ -32,7 +32,7 @@ public class bestAvgWorstExp {
 
             for (int k = 0; k < timesToLoop; k++) {
                 ArrayList<Integer> testArray2 = new ArrayList<>(testArray1);
-                kirkQuickSort.quickSortDriverKirk(testArray2,Comparator.naturalOrder());
+                kirkQuickSort.quickSortDriverKirk(testArray2, Comparator.naturalOrder());
             }
 
             double midPoint = System.nanoTime();
@@ -61,8 +61,5 @@ public class bestAvgWorstExp {
         for (Integer i : threshHoldList) {
             System.out.println(i);
         }
-
     }
-
-
 }

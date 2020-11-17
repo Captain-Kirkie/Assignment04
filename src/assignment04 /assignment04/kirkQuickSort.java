@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Random;
 
+//https://www.geeksforgeeks.org/quick-sort/
 public class kirkQuickSort<T extends Comparable<? super T>> {
 
     public static void main(String args[]) {
@@ -37,10 +38,15 @@ public class kirkQuickSort<T extends Comparable<? super T>> {
             arrayList.set(i, arr[i]);
         }
 
-
     }
 
-    static <T> void random(T[] arr, int low, int high) {
+    private static <T> void swapT(T[] arr, int low, int high) {
+        T temp1 = arr[high];
+        arr[high] = arr[low];
+        arr[low] = temp1;
+    }
+
+    private static <T> void random(T[] arr, int low, int high) {
         Random rand = new Random();
 
         int pivot = rand.nextInt(high - low) + low;
@@ -49,12 +55,34 @@ public class kirkQuickSort<T extends Comparable<? super T>> {
         arr[high] = temp1;
     }
 
+    //find median
+    private static <T> T median(T[] arr, int low, int high, Comparator comparator) {
+        int center = (low + high) / 2; //find the center
 
-    static <T> int partitionKirk(T[] arr, int low, int high, Comparator comparator) {
+        if (comparator.compare(low, center) > 0) { //if low greater than center, swap
+            swapT(arr, low, center);
+        }
+        if (comparator.compare(low, high) > 0) { //if low is greater than high swap
+            swapT(arr, low, high);
+        }
 
-        random(arr, low, high); //Picking random integer
-        T pivot = arr[high];
+        if (comparator.compare(center, high) > 0) { // if center is greater than high, swap
+            swapT(arr, center, high);
+        }
 
+        swapT(arr, center, high); //swap the center and the high
+        return arr[high]; //return high
+
+
+    }
+
+
+    private static <T> int partitionKirk(T[] arr, int low, int high, Comparator comparator) {
+
+      // random(arr, low, high); //Picking random integer
+       T median = median(arr, low, high, Comparator.naturalOrder());
+       T pivot = median;
+       // T pivot = arr[high];
 
         //index for smaller element
         int i = (low - 1);
@@ -80,7 +108,7 @@ public class kirkQuickSort<T extends Comparable<? super T>> {
     }
 
 
-    static <T> void quickSortKirk(T[] arr, int low, int high) {
+    private static <T> void quickSortKirk(T[] arr, int low, int high) {
         if (low < high) {
 
             int pi = partitionKirk(arr, low, high, Comparator.naturalOrder());

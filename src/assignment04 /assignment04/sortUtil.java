@@ -77,13 +77,15 @@ public class sortUtil<T extends Comparable<? super T>> {
 
         System.out.println("QuickSort stuff");
         System.out.println(stringArrayList);
-        quickSortDriver(stringArrayList, Comparator.naturalOrder());
+        //quickSortDriver(stringArrayList, Comparator.naturalOrder());
+        kirkQuickSort.quickSortDriverKirk(stringArrayList, Comparator.naturalOrder());
         System.out.println(stringArrayList);
 
         System.out.println();
         System.out.println("Integer Sorting");
         System.out.println(integerArrayList);
-        quickSortDriver(integerArrayList, Comparator.naturalOrder());
+        //quickSortDriver(integerArrayList, Comparator.naturalOrder());
+        kirkQuickSort.quickSortDriverKirk(integerArrayList, Comparator.naturalOrder());
         System.out.println("Sorted list" + integerArrayList);
 
         ArrayList<Integer> sample = new ArrayList<>();
@@ -91,7 +93,7 @@ public class sortUtil<T extends Comparable<? super T>> {
         sample.add(69);
         sample.add(420);
 
-        quickSortDriver(sample, Comparator.naturalOrder());
+       // quickSortDriver(sample, Comparator.naturalOrder());
 
 
     }
