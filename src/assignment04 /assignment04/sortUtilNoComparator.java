@@ -54,6 +54,7 @@ public class sortUtilNoComparator <T extends Comparable<? super T>> {
             //find the middle
             int middle = (start + end)/ 2;
 
+
             mergeSort(array, start, middle); //sort left side
             mergeSort(array, middle + 1, end); //sort the right side
 
@@ -64,6 +65,7 @@ public class sortUtilNoComparator <T extends Comparable<? super T>> {
     }
 
     void merge(T[] array, int start, int middle, int end) {
+
         T[] leftArray = (T[]) new Comparable[middle - start + 1];  //size of left array
         T[] rightArray = (T[]) new Comparable[end - middle]; //size of right array
 

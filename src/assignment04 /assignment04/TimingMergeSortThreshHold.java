@@ -11,13 +11,12 @@ public class TimingMergeSortThreshHold {
     public static void main(String[] args) {
 
         ArrayList<Double> avgList = new ArrayList<>();
-        ArrayList<Integer>  threshHoldList = new ArrayList<>();
+        ArrayList<Integer> threshHoldList = new ArrayList<>();
 
-        long startTime, stopTime, popArrayStartTime, popArrayStopTime;
-;
-//        for (int r = 11; r < 20; r++) { //how many averages to calculate
+        long startTime, stopTime;
 
-        for(int i = 0; i <= 100; i ++){
+
+        for (int i = 0; i <= 100; i++) {
 
             startTime = System.nanoTime();
             while (System.nanoTime() - startTime < 1000000000) {
@@ -33,26 +32,26 @@ public class TimingMergeSortThreshHold {
             double totalTimeToPopArray = 0;
             ArrayList<Integer> testArray1 = TimingMergeSortThreshHold.genrateRandomArray(N); //create random array of size N
             //System.out.println("this is orginial " + testArray1);
-            for (int k = 0; k < timesToLoop; k++){
+            for (int k = 0; k < timesToLoop; k++) {
                 ArrayList<Integer> testArray2 = new ArrayList<>(testArray1);
                 sortUtil.mergeSort(testArray2, Comparator.naturalOrder());
             }
 
             double midPoint = System.nanoTime();
 
-            for (int empty = 0; empty < timesToLoop; empty++) {
+            for (int empty = 0; empty < timesToLoop; empty++) { //this accounts for the time taken to allocate memory
                 ArrayList<Integer> testArray2 = new ArrayList<>(testArray1);
             }
 
             stopTime = System.nanoTime();
             threshHoldList.add(THRESHOLD);
             double newAvg = (((midPoint - startTime)) - (stopTime - midPoint)) / timesToLoop;
-           // System.out.println(newAvg);
-            THRESHOLD = THRESHOLD + 1;
+            // System.out.println(newAvg);
+//            THRESHOLD = THRESHOLD + 1;
             //System.out.println(newAvg);
             avgList.add(newAvg);
         }
-//        }
+
 
         System.out.println("Averages ");
         for (Double d : avgList) {
@@ -60,7 +59,7 @@ public class TimingMergeSortThreshHold {
         }
 
         System.out.println("Thresholds");
-        for(Integer i: threshHoldList){
+        for (Integer i : threshHoldList) {
             System.out.println(i);
         }
 
@@ -103,10 +102,11 @@ public class TimingMergeSortThreshHold {
      * @param size
      * @return
      */
+
     //worst case
     public static ArrayList<Integer> generateWorstCase(int size) {
         ArrayList<Integer> worstCaseArrayList = new ArrayList<>();
-        for (int i = size; i > 0; i++) {
+        for (int i = size; i > 0; i--) {
             worstCaseArrayList.add(i);
         }
         return worstCaseArrayList;
@@ -123,7 +123,6 @@ public class TimingMergeSortThreshHold {
         for (int i = 0; i < size; i++) { //populate a sorted list
             randomList.add(i);
         }
-
         Random ran = new Random(size);
         for (int i = 0; i < size; i++) {
             int nxt = ran.nextInt(size);
