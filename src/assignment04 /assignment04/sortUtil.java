@@ -39,7 +39,7 @@ public class sortUtil<T extends Comparable<? super T>> {
         System.out.println(integerArrayList);
 
 
-      //  sort based of natural order
+        //  sort based of natural order
         System.out.println(integerArrayList);
         sortUtil.mergeSort(integerArrayList, reverseOrderIntegerComparator);
         System.out.println("Sorted Reverse order ");
@@ -91,7 +91,6 @@ public class sortUtil<T extends Comparable<? super T>> {
         sample.add(420);
 
         quickSortDriver(sample, Comparator.naturalOrder());
-
 
 
     }
@@ -169,12 +168,12 @@ public class sortUtil<T extends Comparable<? super T>> {
 
     /**
      * /* This is just the basic algorithm using an integer array. I wanted to make sure it worked before I made it generic,
-     *  * and it does. It seems like every website on the Internet has you start with both iterators on the left side instead
-     *  * of the way Varun explained with one pointer starting at the beginning and another starting at the end going backward.
-     *  * I was really stuck on trying to do it the way Varun explained which I was eventually able to figure out by looking
-     *  * at his slides. I always pick the last value of the array to be the pivot which turns out to be a pretty good idea
-     *  * because it is always random and easy to implement.
-     *  */
+     * * and it does. It seems like every website on the Internet has you start with both iterators on the left side instead
+     * * of the way Varun explained with one pointer starting at the beginning and another starting at the end going backward.
+     * * I was really stuck on trying to do it the way Varun explained which I was eventually able to figure out by looking
+     * * at his slides. I always pick the last value of the array to be the pivot which turns out to be a pretty good idea
+     * * because it is always random and easy to implement.
+     */
 
     public static <E> void quickSortDriver(ArrayList<E> arrayList, Comparator comparator) {
         E[] arr = (E[]) new Object[arrayList.size()];
@@ -203,10 +202,31 @@ public class sortUtil<T extends Comparable<? super T>> {
         }
 
     }
-
+        //choosing pivot based on median
     private static <T> int partition(T[] arr, int start, int end, Comparator comparator) {
         // initialize start and end of array, and pivot
         int pivot_index = end, L = start, R = end - 1;
+        //Test Pivot Using Median
+        // Pivot using median of three  random values
+        int rand1 = (int) (Math.random() * (end - start - 1));
+        int rand2 = (int) (Math.random() * (end - start - 1));
+        int rand3 = (int) (Math.random() * (end - start - 1));
+        T[] threeRandomValues = (T[]) new Object[3];
+
+        threeRandomValues[0] = arr[rand1];
+        threeRandomValues[1] = arr[rand2];
+        threeRandomValues[2] = arr[rand3];
+
+        // median
+        while (true) {
+            if ((comparator.compare(threeRandomValues[0],threeRandomValues[1]) < 0) && (comparator.compare(threeRandomValues[1], threeRandomValues[2] = arr[rand3]) < 0))
+                break;
+            else
+                InsertionSort.insertionSort(threeRandomValues, Comparator.naturalOrder());
+
+        }
+
+        pivot_index = (int) threeRandomValues[1];
         while (L <= R) {
             if (comparator.compare(arr[L], arr[pivot_index]) <= 0) { //if left array is less than pivot index arr[L] <= arr[pivot_index]
                 L++;

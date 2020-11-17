@@ -32,7 +32,7 @@ public class bestAvgWorstExp {
 
             for (int k = 0; k < timesToLoop; k++) {
                 ArrayList<Integer> testArray2 = new ArrayList<>(testArray1);
-                sortUtil.mergeSort(testArray2, Comparator.naturalOrder());
+                sortUtil.quickSortDriver(testArray2, Comparator.naturalOrder());
             }
 
             double midPoint = System.nanoTime();
