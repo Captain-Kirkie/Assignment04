@@ -97,7 +97,6 @@ public class TimingMergeSortThreshHold {
 
     /**
      * generates a list that is sorted in reverse order
-     *
      * @param size
      * @return
      */
@@ -113,7 +112,6 @@ public class TimingMergeSortThreshHold {
 
     /**
      * returns a shuffled array always in the same order
-     *
      * @param size
      * @return
      */

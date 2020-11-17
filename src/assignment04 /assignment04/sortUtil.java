@@ -91,17 +91,29 @@ public class sortUtil<T extends Comparable<? super T>> {
 
         ArrayList<Integer> integerArrayList1 = new ArrayList<>();
 
-        for(int i = 0; i < 1000; i++){
+        for (int i = 0; i < 10000; i++) {
             int rand = (int) (Math.random() * 10000);
             integerArrayList1.add(rand);
         }
 
-        sortUtil.quickSort(integerArrayList1, Comparator.naturalOrder());
+        sortUtil.mergeSort(integerArrayList1, Comparator.naturalOrder());
 
         System.out.println(integerArrayList1);
-        
+
     }
 
+
+    /**
+     * merge sort driver
+     * create array and pass values through so not to allocate memory everytime the
+     * alogrithm is called recursivly
+     * <p>
+     * could improve by getting rid of for loop copying arraylists into array
+     *
+     * @param arrayList
+     * @param comparator
+     * @param <T>
+     */
     public static <T> void mergeSort(ArrayList<T> arrayList, Comparator<? super T> comparator) {
         //copy the array list over to the array
         T[] array = (T[]) new Object[arrayList.size()];
@@ -117,6 +129,18 @@ public class sortUtil<T extends Comparable<? super T>> {
         }
     }
 
+    /**
+     * actual merge sort, calls itself recursivly
+     * splits up into smaller and smaller arrays until it reaches base case
+     * then calls merge to merge elements back together in sorted order
+     *
+     * @param array      array to be pass
+     * @param start      leftmost section of array to be sorted
+     * @param end        rightmost section of array to be sorted
+     * @param comparator compares items in array
+     * @param values     empty array passed through to be used in merge
+     * @param <T>        type
+     */
     private static <T> void mergeSort(T[] array, int start, int end, Comparator<T> comparator, Object[] values) {
         if (start == end) { //if there is only one item in the array
             return;
@@ -133,6 +157,20 @@ public class sortUtil<T extends Comparable<? super T>> {
             merge(array, start, mid, end, comparator, values);
         }
     }
+
+    /**
+     * merge step, merges items back into array in sorted order
+     * compares values in two arrays and keeps track of indices, merges into one array depending on small value
+     * cleans up remainder at the end
+     *
+     * @param array      values passed
+     * @param start      leftmost section of array to be merged
+     * @param mid        stoping point for left pointer
+     * @param end        stopping point for right pointer
+     * @param comparator compares items
+     * @param values     empty array to be merged into
+     * @param <T>        types
+     */
 
     private static <T> void merge(T[] array, int start, int mid, int end, Comparator<T> comparator, Object[] values) {
         int size = end - start + 1;
@@ -182,6 +220,12 @@ public class sortUtil<T extends Comparable<? super T>> {
      * * because it is always random and easy to implement.
      */
 
+    /**
+     * quickSort driver, can improve by not copying arraylists into array
+     * @param arrayList
+     * @param comparator
+     * @param <E>
+     */
     public static <E> void quickSort(ArrayList<E> arrayList, Comparator comparator) {
         E[] arr = (E[]) new Object[arrayList.size()];
         for (int i = 0; i < arrayList.size(); i++) {
@@ -194,6 +238,16 @@ public class sortUtil<T extends Comparable<? super T>> {
         }
     }
 
+    /**
+     * recursive quicksort
+     * uses insertion sort depending on threshold
+     *
+     * @param arr
+     * @param start
+     * @param end
+     * @param comparator
+     * @param <E>
+     */
     private static <E> void Quicksort(E[] arr, int start, int end, Comparator comparator) {
         if (arr.length <= TimingMergeSortThreshHold.THRESHOLD) {
             InsertionSort.insertionSort(arr, comparator);
@@ -210,9 +264,18 @@ public class sortUtil<T extends Comparable<? super T>> {
 
     }
 
-    //choosing pivot based on median
+    /**
+     * partitions elements in array and compares/swaps them accordingly
+     * @param arr
+     * @param start
+     * @param end
+     * @param comparator
+     * @param <T>
+     * @return
+     */
+  //partitions elements in the array
     private static <T> int partition(T[] arr, int start, int end, Comparator comparator) {
-       // kirkQuickSort.random(arr, start, end);
+        // kirkQuickSort.random(arr, start, end);
         int pivot_index = median(arr, start, end, comparator);
 //        int pivot_index = end;
 
@@ -240,7 +303,14 @@ public class sortUtil<T extends Comparable<? super T>> {
         return pivot_index;
     }
 
-    static <T> void randomPivot(T [] arr, int low, int high){
+    /**
+     * used for picking a random pivot in pivot testing
+     * @param arr
+     * @param low
+     * @param high
+     * @param <T>
+     */
+    static <T> void randomPivot(T[] arr, int low, int high) {
         Random rand = new Random();
 
         int pivot = rand.nextInt(high - low) + low;
@@ -249,12 +319,14 @@ public class sortUtil<T extends Comparable<? super T>> {
         arr[high] = temp1;
     }
 
+    //swap
     public static <T> void swap(T[] arr, int l, int r) {
         T temp = arr[l];
         arr[l] = arr[r];
         arr[r] = temp;
     }
 
+    //prints array
     public static void printArray(int[] arr) {
         for (int number : arr) {
             System.out.print(number + ", ");
@@ -263,8 +335,16 @@ public class sortUtil<T extends Comparable<? super T>> {
     }
 
 
-
-    //find median
+    /**
+     * finds median in a list, used to pick the median pivot during quicksort
+     *
+     * @param arr
+     * @param low
+     * @param high
+     * @param comparator
+     * @param <T>
+     * @return
+     */
     public static <T> int median(T[] arr, int low, int high, Comparator comparator) {
         int center = (low + high) / 2; //find the center
 
@@ -284,6 +364,15 @@ public class sortUtil<T extends Comparable<? super T>> {
 
 
     }
+
+    /**
+     * swaps specified items in a list
+     *
+     * @param arr
+     * @param low
+     * @param high
+     * @param <T>
+     */
     public static <T> void swapT(T[] arr, int low, int high) {
         T temp1 = arr[high];
         arr[high] = arr[low];
