@@ -99,11 +99,7 @@ public class sortUtil<T extends Comparable<? super T>> {
         sortUtil.quickSort(integerArrayList1, Comparator.naturalOrder());
 
         System.out.println(integerArrayList1);
-
-
-
-
-
+        
     }
 
     public static <T> void mergeSort(ArrayList<T> arrayList, Comparator<? super T> comparator) {

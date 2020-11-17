@@ -88,7 +88,7 @@ public class TimingMergeSortThreshHold {
     //average case
     public static ArrayList<Integer> genrateRandomArray(int size) {
         ArrayList<Integer> randomList = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i <= size; i++) {
             int rand = (int) (Math.random() * size);
             randomList.add(rand);
         }
