@@ -4,6 +4,7 @@ package assignment04;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Random;
 
 //used as reference http://www.java2s.com/Tutorial/Java/0140__Collections/GenericMergeSorterwithgenericComparator.htm
 public class sortUtil<T extends Comparable<? super T>> {
@@ -205,8 +206,12 @@ public class sortUtil<T extends Comparable<? super T>> {
 
     //choosing pivot based on median
     private static <T> int partition(T[] arr, int start, int end, Comparator comparator) {
-        // initialize start and end of array, and pivot
-        int pivot_index = end, L = start, R = end - 1;
+
+        int pivot_index = end;
+        //int pivot_index = start;
+
+        int L = start, R = end - 1;
+       //sorts using index at end and start but not in middle
         //Test Pivot Using Median
         // Pivot using median of three  random values
 //        int rand1 = (int) (Math.random() * (end - start - 1));
@@ -250,6 +255,15 @@ public class sortUtil<T extends Comparable<? super T>> {
         // after you swap the values. This caused a bug in my code for a while.
         pivot_index = L;
         return pivot_index;
+    }
+
+    static <T> void randomPivot(T [] arr, int low, int high){
+        Random rand = new Random();
+
+        int pivot = rand.nextInt(high - low) + low;
+        T temp1 = arr[pivot];
+        arr[pivot] = arr[high];
+        arr[high] = temp1;
     }
 
     public static <T> void swap(T[] arr, int l, int r) {
