@@ -6,55 +6,63 @@ import java.util.Comparator;
 import java.util.Random;
 
 public class TimingMergeSort {
-
+    static int THRESHOLD = 50;
 
     public static void main(String[] args) {
 
         ArrayList<Double> avgList = new ArrayList<>();
+        ArrayList<Integer>  threshHoldList = new ArrayList<>();
 
         long startTime, stopTime, popArrayStartTime, popArrayStopTime;
 ;
-        for (int r = 11; r < 20; r++) { //how many averages to calculate
+//        for (int r = 11; r < 20; r++) { //how many averages to calculate
 
-            ArrayList<Double> timeList = new ArrayList<Double>(); //reset the list
+        for(int i = 0; i <= 50; i ++){
 
             startTime = System.nanoTime();
             while (System.nanoTime() - startTime < 1000000000) {
                 //empty block
                 //Wait for thread to stabalize
             }
-            int N = (int) Math.pow(2, r); //this will be the size of the collection
+            int N = (int) Math.pow(2, 11); //this will be the size of the collection
 
 
-            System.out.println("Size of N: " + N);
+            //System.out.println("Size of N: " + N);
             double timesToLoop = 1000;
             startTime = System.nanoTime(); //time it
             double totalTimeToPopArray = 0;
-            ArrayList<Integer> testArray1 = TimingMergeSort.shuffleListNonRandom(N); //create random array of size N
+            ArrayList<Integer> testArray1 = TimingMergeSort.genrateRandomArray(N); //create random array of size N
             //System.out.println("this is orginial " + testArray1);
             for (int k = 0; k < timesToLoop; k++){
                 ArrayList<Integer> testArray2 = new ArrayList<>(testArray1);
-                sortUtil.quickSortDriver(testArray2, Comparator.naturalOrder());
+                sortUtil.mergeSort(testArray2, Comparator.naturalOrder());
             }
 
             double midPoint = System.nanoTime();
 
             for (int empty = 0; empty < timesToLoop; empty++) {
-               
+
             }
 
             stopTime = System.nanoTime();
+            threshHoldList.add(THRESHOLD);
             double newAvg = (((midPoint - startTime)) - (stopTime - midPoint)) / timesToLoop;
+           // System.out.println(newAvg);
+            THRESHOLD = THRESHOLD + 1;
             //System.out.println(newAvg);
             avgList.add(newAvg);
         }
+//        }
 
+        System.out.println("Averages ");
         for (Double d : avgList) {
             System.out.println(d);
         }
 
-
-
+        System.out.println("Thresholds");
+        for(Integer i: threshHoldList){
+            System.out.println(i);
+        }
 
     }
 

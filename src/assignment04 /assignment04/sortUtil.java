@@ -7,7 +7,7 @@ import java.util.Comparator;
 
 //used as reference http://www.java2s.com/Tutorial/Java/0140__Collections/GenericMergeSorterwithgenericComparator.htm
 public class sortUtil<T extends Comparable<? super T>> {
-    final static int THRESHOLD = 40;
+
 
     public static void main(String args[]) {
 
@@ -32,18 +32,18 @@ public class sortUtil<T extends Comparable<? super T>> {
             int rand = (int) (Math.random() * 100);
             integerArrayList.add(rand);
         }
-//        //sort based of natural order
-//        System.out.println(integerArrayList);
-//        sortUtil.mergeSort(integerArrayList, Comparator.naturalOrder());
-//        System.out.println("Sorted ");
-//        System.out.println(integerArrayList);
-//
-//
-//      //  sort based of natural order
-//        System.out.println(integerArrayList);
-//        sortUtil.mergeSort(integerArrayList, reverseOrderIntegerComparator);
-//        System.out.println("Sorted Reverse order ");
-//        System.out.println(integerArrayList);
+        //sort based of natural order
+        System.out.println(integerArrayList);
+        sortUtil.mergeSort(integerArrayList, Comparator.naturalOrder());
+        System.out.println("Sorted ");
+        System.out.println(integerArrayList);
+
+
+      //  sort based of natural order
+        System.out.println(integerArrayList);
+        sortUtil.mergeSort(integerArrayList, reverseOrderIntegerComparator);
+        System.out.println("Sorted Reverse order ");
+        System.out.println(integerArrayList);
 
         //Sorting strings
         ArrayList<String> stringArrayList = new ArrayList<String>();
@@ -64,14 +64,14 @@ public class sortUtil<T extends Comparable<? super T>> {
         stringArrayList.add("Mario");
         stringArrayList.add("Nick");
 
-//        System.out.println();
-//        sortUtil.mergeSort(stringArrayList, Comparator.naturalOrder());
-//        System.out.println("Sorted Strings ");
-//        System.out.println(stringArrayList);
-//
-//        sortUtil.mergeSort(stringArrayList, reverseOrderStringComparator);
-//        System.out.println("Sorted Strings Reverse Order");
-//        System.out.println(stringArrayList);
+        System.out.println();
+        sortUtil.mergeSort(stringArrayList, Comparator.naturalOrder());
+        System.out.println("Sorted Strings ");
+        System.out.println(stringArrayList);
+
+        sortUtil.mergeSort(stringArrayList, reverseOrderStringComparator);
+        System.out.println("Sorted Strings Reverse Order");
+        System.out.println(stringArrayList);
 
 
         System.out.println("QuickSort stuff");
@@ -102,8 +102,8 @@ public class sortUtil<T extends Comparable<? super T>> {
         for (int i = 0; i < arrayList.size(); i++) {
             array[i] = arrayList.get(i);
         }
-
-        mergeSort(array, 0, array.length - 1, comparator);
+        Object[] values = new Object[array.length]; //this will be sorted array
+        mergeSort(array, 0, array.length - 1, comparator, values);
 
         //copy back to arrayList
         for (int i = 0; i < arrayList.size(); i++) {
@@ -111,26 +111,26 @@ public class sortUtil<T extends Comparable<? super T>> {
         }
     }
 
-    private static <T> void mergeSort(T[] array, int start, int end, Comparator<T> comparator) {
+    private static <T> void mergeSort(T[] array, int start, int end, Comparator<T> comparator, Object[] values) {
         if (start == end) { //if there is only one item in the array
             return;
         }
-        if (end - start <= THRESHOLD) {
+        if (end - start <= TimingMergeSort.THRESHOLD) {
             InsertionSort.insertionSort(array, comparator);
         } else { //do merge sort
             int mid = (start + end) / 2;
             //sort both halves
-            mergeSort(array, start, mid, comparator); //sort left half of array
-            mergeSort(array, mid + 1, end, comparator); //sort the right
+            mergeSort(array, start, mid, comparator, values); //sort left half of array
+            mergeSort(array, mid + 1, end, comparator, values); //sort the right
 
             //merge them
-            merge(array, start, mid, end, comparator);
+            merge(array, start, mid, end, comparator, values);
         }
     }
 
-    private static <T> void merge(T[] array, int start, int mid, int end, Comparator<T> comparator) {
+    private static <T> void merge(T[] array, int start, int mid, int end, Comparator<T> comparator, Object[] values) {
         int size = end - start + 1;
-        Object[] values = new Object[size]; //this will be sorted array
+
 
         int leftPointer = start;
         int rightPointer = mid + 1;
@@ -189,7 +189,7 @@ public class sortUtil<T extends Comparable<? super T>> {
     }
 
     private static <E> void quicksort(E[] arr, int start, int end, Comparator comparator) {
-        if (arr.length <= THRESHOLD) {
+        if (arr.length <= TimingMergeSort.THRESHOLD) {
             InsertionSort.insertionSort(arr, comparator);
         } else {
             // base case
